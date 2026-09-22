@@ -1,0 +1,25 @@
+{
+  "applicant_id": "APP-2026-4401",
+  "full_name": "Tariq Mahmood",
+  "national_id": "35202-9182374-1",
+  "email": "tariq.m99@example.com",
+  "phone": "+92-321-9876543",
+  "date_of_birth": "1998-11-20",
+  "employment_type": "Freelance Gig Worker",
+  "employer_name": "Self-Employed",
+  "years_employed": 0.8,
+  "requested_loan_amount": 25000.0,
+  "loan_purpose": "Debt Consolidation",
+  "loan_tenure_months": 24,
+  "credit_score": 580,
+  "monthly_gross_income": 2200.0,
+  "existing_monthly_debt_obligations": 1300.0,
+  "bank_statement_summary": {
+    "account_number": "PK89HABB0009876543210987",
+    "total_credits_6m": 12000.0,
+    "total_debits_6m": 12400.0,
+    "average_monthly_balance": 180.0,
+    "unresolved_bounces_count": 3,
+    "payroll_detected": false
+  }
+}

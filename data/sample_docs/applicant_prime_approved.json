@@ -1,0 +1,25 @@
+{
+  "applicant_id": "APP-2026-9812",
+  "full_name": "Ayesha Khan",
+  "national_id": "42101-5829103-9",
+  "email": "ayesha.khan@example.com",
+  "phone": "+92-300-1234567",
+  "date_of_birth": "1992-05-14",
+  "employment_type": "Salaried Full-time",
+  "employer_name": "TechGlobal Logistics Ltd",
+  "years_employed": 4.5,
+  "requested_loan_amount": 15000.0,
+  "loan_purpose": "Home Renovation",
+  "loan_tenure_months": 36,
+  "credit_score": 765,
+  "monthly_gross_income": 4500.0,
+  "existing_monthly_debt_obligations": 900.0,
+  "bank_statement_summary": {
+    "account_number": "PK36MEZN0001234567890123",
+    "total_credits_6m": 27000.0,
+    "total_debits_6m": 21600.0,
+    "average_monthly_balance": 2400.0,
+    "unresolved_bounces_count": 0,
+    "payroll_detected": true
+  }
+}

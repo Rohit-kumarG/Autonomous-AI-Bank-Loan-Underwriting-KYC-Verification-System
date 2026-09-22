@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous AI Bank Loan Underwriting & KYC System</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <div class="logo-icon">🏦</div>
+            <div class="brand-text">
+                <h1>AURORA CREDIT AI</h1>
+                <span class="sub-brand">Autonomous Banking Underwriting & KYC Engine</span>
+            </div>
+        </div>
+        <div class="nav-actions">
+            <div class="compliance-badge">
+                <span class="pulse-dot"></span>
+                <span>PII & Bank Policy Guard Active</span>
+            </div>
+            <a href="https://github.com/Rohit-kumarG/Autonomous-AI-Bank-Loan-Underwriting-KYC-Verification-System" target="_blank" class="github-link">
+                GitHub Repo ↗
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="dashboard-container">
+        <!-- Left Column: Input & Controls -->
+        <section class="card input-panel">
+            <div class="panel-header">
+                <h2>📋 Loan Application Ingestion</h2>
+                <div class="preset-buttons">
+                    <button type="button" class="btn-sm" id="btn-load-prime">Load Prime Profile</button>
+                    <button type="button" class="btn-sm btn-warn" id="btn-load-risk">Load High-Risk Profile</button>
+                </div>
+            </div>
+
+            <form id="loan-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="applicant_id">Application Reference ID</label>
+                        <input type="text" id="applicant_id" value="APP-2026-9812" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="full_name">Full Legal Name</label>
+                        <input type="text" id="full_name" value="Ayesha Khan" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="national_id">National ID / CNIC (PII)</label>
+                        <input type="text" id="national_id" value="42101-5829103-9" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number (PII)</label>
+                        <input type="text" id="phone" value="+92-300-1234567" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" value="ayesha.khan@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date_of_birth">Date of Birth</label>
+                        <input type="date" id="date_of_birth" value="1992-05-14" required>
+                    </div>
+                </div>
+
+                <div class="form-divider"><span>Financial & Employment Profile</span></div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="employer_name">Employer / Business</label>
+                        <input type="text" id="employer_name" value="TechGlobal Logistics Ltd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="years_employed">Years Employed</label>
+                        <input type="number" step="0.1" id="years_employed" value="4.5" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="monthly_gross_income">Monthly Net Income ($)</label>
+                        <input type="number" id="monthly_gross_income" value="4500" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="existing_monthly_debt_obligations">Existing Monthly Debt ($)</label>
+                        <input type="number" id="existing_monthly_debt_obligations" value="900" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="credit_score">Credit Bureau Score (FICO)</label>
+                        <input type="number" id="credit_score" value="765" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="unresolved_bounces_count">Unresolved Bounces (6M)</label>
+                        <input type="number" id="unresolved_bounces_count" value="0" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="requested_loan_amount">Requested Loan Amount ($)</label>
+                        <input type="number" id="requested_loan_amount" value="15000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loan_tenure_months">Tenure (Months)</label>
+                        <input type="number" id="loan_tenure_months" value="36" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="btn-submit">
+                    ⚡ Execute Autonomous Underwriting Workflow
+                </button>
+            </form>
+        </section>
+
+        <!-- Right Column: Live Multi-Agent Pipeline & Decision Memo -->
+        <section class="results-panel">
+            <!-- Agent State Visualizer -->
+            <div class="card agent-flow-card">
+                <h2>🤖 Multi-Agent Orchestration Room</h2>
+                <div class="agent-pipeline-grid">
+                    <div class="agent-node" id="node-pii">
+                        <div class="node-icon">🛡️</div>
+                        <div class="node-title">PII Sanitizer</div>
+                        <div class="node-status status-ready">Ready</div>
+                    </div>
+                    <div class="agent-connector"></div>
+                    <div class="agent-node" id="node-kyc">
+                        <div class="node-icon">🆔</div>
+                        <div class="node-title">KYC Agent</div>
+                        <div class="node-status status-ready">Ready</div>
+                    </div>
+                    <div class="agent-connector"></div>
+                    <div class="agent-node" id="node-risk">
+                        <div class="node-icon">📊</div>
+                        <div class="node-title">Risk & RAG Agent</div>
+                        <div class="node-status status-ready">Ready</div>
+                    </div>
+                    <div class="agent-connector"></div>
+                    <div class="agent-node" id="node-decision">
+                        <div class="node-icon">⚖️</div>
+                        <div class="node-title">Chief Underwriter</div>
+                        <div class="node-status status-ready">Ready</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Financial Metrics HUD -->
+            <div class="metrics-grid" id="metrics-hud" style="display: none;">
+                <div class="metric-card">
+                    <span class="metric-label">Decision Verdict</span>
+                    <span class="metric-val" id="metric-verdict">-</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Approved Amount</span>
+                    <span class="metric-val" id="metric-amount">-</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Interest Rate</span>
+                    <span class="metric-val" id="metric-rate">-</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Debt-To-Income (DTI)</span>
+                    <span class="metric-val" id="metric-dti">-</span>
+                </div>
+            </div>
+
+            <!-- Decision Memo & Audit Log -->
+            <div class="card memo-card">
+                <div class="memo-header">
+                    <h2>📑 Official Credit Decision Memo</h2>
+                    <button class="btn-sm" id="btn-copy-memo">Copy Memo</button>
+                </div>
+                <div class="memo-content" id="memo-output">
+                    <p class="placeholder-text">Load an applicant profile and click "Execute Autonomous Underwriting Workflow" to watch the AI Agents process and evaluate the application.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Enterprise Banking AI Automation • LangGraph Multi-Agent Architecture • RAG Credit Knowledge Base • n8n Webhook Enabled</p>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

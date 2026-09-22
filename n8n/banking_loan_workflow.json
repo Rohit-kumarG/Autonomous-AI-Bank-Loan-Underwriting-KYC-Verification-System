@@ -1,0 +1,154 @@
+{
+  "name": "Autonomous Banking Loan Underwriting & KYC Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "loan-application-trigger",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "1001",
+      "name": "Webhook: Loan Application Submitted",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:8000/api/v1/n8n-webhook",
+        "method": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
+        "options": {}
+      },
+      "id": "1002",
+      "name": "AI Agent Underwriting Engine (FastAPI)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.decision }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "APPROVED"
+            },
+            {
+              "value2": "CONDITIONALLY_APPROVED"
+            },
+            {
+              "value2": "REJECTED"
+            }
+          ]
+        }
+      },
+      "id": "1003",
+      "name": "Switch: Underwriting Decision",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#credit-approvals",
+        "text": "=🎉 Loan Application {{ $json.applicant_id }} has been APPROVED for ${{ $json.approved_amount }} at {{ $json.interest_rate }}% interest rate.\n\nRationale: {{ $json.summary_memo }}"
+      },
+      "id": "1004",
+      "name": "Slack: Notify Credit Committee",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [980, 180]
+    },
+    {
+      "parameters": {
+        "subject": "=Notice Regarding Your Loan Application: {{ $json.applicant_id }}",
+        "body": "=Dear Applicant,\n\nThank you for applying. After careful review against bank credit policies, your application has been {{ $json.decision }}.\n\nNotes: {{ $json.summary_memo }}\n\nSincerely,\nAutonomous Credit Committee"
+      },
+      "id": "1005",
+      "name": "Email: Send Decision to Applicant",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [980, 420]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"decision\": $json.decision,\n  \"approved_amount\": $json.approved_amount,\n  \"applicant_id\": $json.applicant_id\n}"
+      },
+      "id": "1006",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1220, 300]
+    }
+  ],
+  "connections": {
+    "Webhook: Loan Application Submitted": {
+      "main": [
+        [
+          {
+            "node": "AI Agent Underwriting Engine (FastAPI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent Underwriting Engine (FastAPI)": {
+      "main": [
+        [
+          {
+            "node": "Switch: Underwriting Decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch: Underwriting Decision": {
+      "main": [
+        [
+          {
+            "node": "Slack: Notify Credit Committee",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack: Notify Credit Committee",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email: Send Decision to Applicant",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
